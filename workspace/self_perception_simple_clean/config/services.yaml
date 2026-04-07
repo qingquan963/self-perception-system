@@ -1,0 +1,119 @@
+# services.yaml - 服务列表配置
+# 版本: 1.0
+# 描述: 自我感知系统服务治理配置，支持跨平台热重载
+
+version: "1.0"
+
+# 全局配置
+supervisor:
+  health_check_interval: 20      # 秒
+  restart_cooldown: 10           # 重启冷却时间（秒）
+  max_restart_attempts: 5        # 单服务每小时最大重启次数
+  instance_lock_file: "{{PROJECT_DIR}}/data/supervisor.lock"
+  state_db: "{{PROJECT_DIR}}/data/state.db"
+  log_dir: "{{PROJECT_DIR}}/data/logs"
+
+# 服务列表
+services:
+  api_service:
+    name: "api_service"
+    port: 8011
+    cmd:
+      - "python"
+      - "-m"
+      - "uvicorn"
+      - "api_service:app"
+      - "--host"
+      - "127.0.0.1"
+      - "--port"
+      - "8011"
+      - "--log-level"
+      - "warning"
+    cwd: "{{PROJECT_DIR}}"
+    health_url: "http://127.0.0.1:8011/health"
+    health_interval: 20
+    restart_threshold: 2         # 连续失败次数阈值
+    depends: []                  # 依赖的服务名
+    resources:
+      max_memory_mb: 512
+      max_cpu_percent: 80
+    start_timeout: 30
+    log_file: "{{PROJECT_DIR}}/data/logs/api_service.log"
+
+  vector_service:
+    name: "vector_service"
+    port: 8007
+    cmd:
+      - "python"
+      - "-m"
+      - "uvicorn"
+      - "vector_service:app"
+      - "--host"
+      - "127.0.0.1"
+      - "--port"
+      - "8007"
+      - "--log-level"
+      - "warning"
+    cwd: "{{PROJECT_DIR}}"
+    health_url: "http://127.0.0.1:8007/health"
+    health_interval: 20
+    restart_threshold: 2
+    depends: []
+    resources:
+      max_memory_mb: 1024
+      max_cpu_percent: 90
+    start_timeout: 30
+    log_file: "{{PROJECT_DIR}}/data/logs/vector_service.log"
+
+  frontend:
+    name: "frontend"
+    port: 8090
+    cmd:
+      - "python"
+      - "frontend_server.py"
+    cwd: "{{PROJECT_DIR}}"
+    health_url: "http://127.0.0.1:8090/dashboard.html"
+    health_interval: 20
+    restart_threshold: 2
+    depends: []
+    resources:
+      max_memory_mb: 256
+      max_cpu_percent: 50
+    start_timeout: 30
+    log_file: "{{PROJECT_DIR}}/data/logs/frontend.log"
+
+  compaction_writer:
+    name: "compaction_writer"
+    port: 8014
+    cmd:
+      - "python"
+      - "compaction_writer.py"
+    cwd: "{{PROJECT_DIR}}"
+    health_url: "http://127.0.0.1:8014/health"
+    health_interval: 20
+    restart_threshold: 2
+    depends:
+      - "api_service"
+      - "vector_service"
+    resources:
+      max_memory_mb: 384
+      max_cpu_percent: 70
+    start_timeout: 30
+    log_file: "{{PROJECT_DIR}}/data/logs/compaction_writer.log"
+
+  dream_service:
+    name: "dream_service"
+    port: 8001
+    cmd:
+      - "python"
+      - "dream_service.py"
+    cwd: "{{PROJECT_DIR}}"
+    health_url: "http://127.0.0.1:8001/memories/dream/status"
+    health_interval: 20
+    restart_threshold: 2
+    depends: []
+    resources:
+      max_memory_mb: 512
+      max_cpu_percent: 80
+    start_timeout: 30
+    log_file: "{{PROJECT_DIR}}/data/logs/dream_service.log"

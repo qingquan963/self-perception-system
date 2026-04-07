@@ -1,0 +1,42 @@
+{
+  "status": "idle",
+  "run_id": "8b087702-f130-4437-948b-d35dd966744f",
+  "phase": null,
+  "started_at": "2026-04-07T18:48:27.682743",
+  "completed_at": "2026-04-07T18:48:45.406564",
+  "progress": 1.0,
+  "can_resume": false,
+  "last_report": {
+    "run_id": "8b087702-f130-4437-948b-d35dd966744f",
+    "started_at": "2026-04-07T18:48:27.682743",
+    "completed_at": "2026-04-07T18:48:45.406564",
+    "duration_seconds": 17.72,
+    "dry_run": false,
+    "phases": {
+      "deduplicator": {
+        "candidates": 81,
+        "duplicates_found": 0,
+        "merged_candidates": 0,
+        "deleted_ids": [],
+        "skipped": 0,
+        "errors": []
+      },
+      "denoiser": {
+        "candidates": 81,
+        "soft_deleted": [],
+        "hard_deleted": [],
+        "restored": [],
+        "skipped": 0,
+        "errors": []
+      }
+    },
+    "summary": {
+      "total_deleted": 0,
+      "total_soft_deleted": 0,
+      "total_hard_deleted": 0,
+      "duration_seconds": 17.72
+    },
+    "issues": []
+  },
+  "last_error": null
+}

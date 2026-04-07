@@ -1,0 +1,29 @@
+# =============================================
+# 自我感知记忆系统 - Python 依赖
+# =============================================
+
+# Core
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+pydantic==2.5.0
+
+# Config & Env
+python-dotenv==1.0.0
+pyyaml==6.0.1
+
+# Vector / Embedding
+chromadb==0.4.22
+sentence-transformers==2.2.2
+numpy==1.24.3
+
+# HTTP
+httpx==0.25.2
+
+# System / Process
+psutil==5.9.6
+
+# Logging
+structlog==23.2.0
+
+# Utils
+python-dateutil==2.8.2

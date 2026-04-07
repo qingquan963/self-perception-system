@@ -1,0 +1,26 @@
+[
+  {
+    "id": "memory_001",
+    "text": "系统初始化完成，V1.8_optimized版本部署成功",
+    "type": "system",
+    "score": 100.0,
+    "timestamp": "2026-03-23T20:43:36.907021",
+    "version": "V1.8_optimized"
+  },
+  {
+    "id": "memory_002",
+    "text": "部署时间: 2026-03-23 20:28:00，版本: V1.8_optimized，备份版本: V1.7_final_backup",
+    "type": "system",
+    "score": 95.0,
+    "timestamp": "2026-03-23T20:43:36.907021",
+    "version": "V1.8_optimized"
+  },
+  {
+    "id": "memory_003",
+    "text": "性能目标: 准确率≥95%，评分误差<10分，communication识别≥90%，响应时间<2秒",
+    "type": "technical",
+    "score": 90.0,
+    "timestamp": "2026-03-23T20:43:36.907021",
+    "version": "V1.8_optimized"
+  }
+]

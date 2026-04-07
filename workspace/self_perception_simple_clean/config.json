@@ -1,0 +1,17 @@
+﻿{
+    "system": {
+        "name": "精简自我感知系统",
+        "version": "1.0.0",
+        "description": "精简的记忆和自我感知系统"
+    },
+    "services": {
+        "api_port": 8011,
+        "vector_port": 8007,
+        "frontend_port": 8080
+    },
+    "memory": {
+        "max_memories": 100,
+        "auto_cleanup": true,
+        "backup_enabled": true
+    }
+}

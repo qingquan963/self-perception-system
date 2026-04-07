@@ -1,0 +1,249 @@
+{
+  "meta": {
+    "lastTouchedVersion": "2026.3.13",
+    "lastTouchedAt": "2026-04-05T10:53:00.342Z",
+    "note": "敏感信息已脱敏，仅保留结构"
+  },
+  "env": {
+    "NO_PROXY": "*.qq.com,*.sgroup.qq.com,*.tencent.com,*.minimaxi.com,*.minimax.io,*.deepseek.com,localhost,127.0.0.1",
+    "no_proxy": "*.qq.com,*.sgroup.qq.com,*.tencent.com,*.minimaxi.com,*.minimax.io,*.deepseek.com,localhost,127.0.0.1"
+  },
+  "wizard": {
+    "lastRunAt": "2026-04-05T02:01:10.252Z",
+    "lastRunVersion": "2026.3.13",
+    "lastRunCommand": "doctor",
+    "lastRunMode": "local"
+  },
+  "models": {
+    "mode": "merge",
+    "providers": {
+      "minimax-plan": {
+        "baseUrl": "https://api.minimaxi.com/anthropic",
+        "apiKey": "[REDACTED]",
+        "api": "anthropic-messages",
+        "models": [
+          {
+            "id": "MiniMax-M2.7",
+            "name": "MiniMax-M2.7"
+          }
+        ]
+      },
+      "deepseek": {
+        "baseUrl": "https://api.deepseek.com/v1",
+        "apiKey": "[REDACTED]",
+        "api": "openai-completions",
+        "models": [
+          {
+            "id": "deepseek-chat",
+            "name": "DeepSeek Chat",
+            "contextWindow": 128000,
+            "maxTokens": 16000
+          },
+          {
+            "id": "deepseek-reasoner",
+            "name": "DeepSeek Reasoner",
+            "reasoning": true,
+            "contextWindow": 128000,
+            "maxTokens": 16000
+          }
+        ]
+      }
+    }
+  },
+  "agents": {
+    "defaults": {
+      "model": {
+        "primary": "minimax-plan/MiniMax-M2.7"
+      },
+      "compaction": {
+        "mode": "safeguard"
+      },
+      "sandbox": {
+        "mode": "non-main",
+        "workspaceAccess": "rw",
+        "scope": "session",
+        "docker": {
+          "image": "openclaw-sandbox-common:bookworm-slim",
+          "network": "bridge"
+        }
+      }
+    },
+    "list": [
+      {
+        "id": "main",
+        "subagents": {
+          "allowAgents": ["*"]
+        },
+        "sandbox": {
+          "mode": "off"
+        }
+      },
+      {
+        "id": "architect",
+        "name": "Architect",
+        "agentDir": "C:\\Users\\Administrator\\.openclaw\\agents\\architect",
+        "model": {
+          "primary": "minimax-plan/MiniMax-M2.7"
+        },
+        "sandbox": {
+          "mode": "off"
+        }
+      },
+      {
+        "id": "planner",
+        "name": "Planner",
+        "agentDir": "C:\\Users\\Administrator\\.openclaw\\agents\\planner",
+        "model": {
+          "primary": "minimax-plan/MiniMax-M2.7"
+        },
+        "sandbox": {
+          "mode": "off"
+        }
+      },
+      {
+        "id": "executor",
+        "name": "Executor",
+        "agentDir": "C:\\Users\\Administrator\\.openclaw\\agents\\executor",
+        "model": {
+          "primary": "minimax-plan/MiniMax-M2.7"
+        },
+        "sandbox": {
+          "mode": "off"
+        }
+      },
+      {
+        "id": "reviewer",
+        "name": "Reviewer",
+        "agentDir": "C:\\Users\\Administrator\\.openclaw\\agents\\reviewer",
+        "model": {
+          "primary": "minimax-plan/MiniMax-M2.7"
+        },
+        "sandbox": {
+          "mode": "off"
+        }
+      },
+      {
+        "id": "verifier",
+        "name": "Verifier",
+        "agentDir": "C:\\Users\\Administrator\\.openclaw\\agents\\verifier",
+        "model": {
+          "primary": "minimax-plan/MiniMax-M2.7"
+        },
+        "sandbox": {
+          "mode": "off"
+        }
+      },
+      {
+        "id": "debugger",
+        "name": "Debugger",
+        "agentDir": "C:\\Users\\Administrator\\.openclaw\\agents\\debugger",
+        "model": {
+          "primary": "deepseek/deepseek-reasoner"
+        },
+        "sandbox": {
+          "mode": "off"
+        }
+      },
+      {
+        "id": "security-reviewer",
+        "name": "Security Reviewer",
+        "agentDir": "C:\\Users\\Administrator\\.openclaw\\agents\\security-reviewer",
+        "model": {
+          "primary": "minimax-plan/MiniMax-M2.7"
+        },
+        "sandbox": {
+          "mode": "off"
+        }
+      },
+      {
+        "id": "doc-writer",
+        "name": "Doc Writer",
+        "agentDir": "C:\\Users\\Administrator\\.openclaw\\agents\\doc-writer",
+        "model": {
+          "primary": "minimax-plan/MiniMax-M2.7"
+        },
+        "sandbox": {
+          "mode": "off"
+        }
+      },
+      {
+        "id": "deployer",
+        "name": "Deployer",
+        "agentDir": "C:\\Users\\Administrator\\.openclaw\\agents\\deployer",
+        "model": {
+          "primary": "minimax-plan/MiniMax-M2.7"
+        },
+        "sandbox": {
+          "mode": "off"
+        }
+      }
+    ]
+  },
+  "tools": {
+    "sandbox": {
+      "tools": {
+        "allow": [
+          "exec",
+          "process",
+          "read",
+          "write",
+          "edit",
+          "apply_patch",
+          "web_fetch",
+          "web_search"
+        ],
+        "deny": [
+          "browser",
+          "canvas",
+          "nodes",
+          "cron",
+          "gateway",
+          "telegram",
+          "whatsapp",
+          "discord",
+          "irc",
+          "googlechat",
+          "slack",
+          "signal",
+          "imessage",
+          "line",
+          "message"
+        ]
+      }
+    }
+  },
+  "commands": {
+    "native": "auto",
+    "nativeSkills": "auto",
+    "restart": true,
+    "ownerDisplay": "raw"
+  },
+  "channels": {
+    "qqbot": {
+      "enabled": true,
+      "appId": "[REDACTED]",
+      "clientSecret": "[REDACTED]"
+    }
+  },
+  "gateway": {
+    "mode": "local",
+    "auth": {
+      "mode": "token",
+      "token": "[REDACTED]"
+    }
+  },
+  "plugins": {
+    "allow": [
+      "openclaw-qqbot",
+      "memory-preload"
+    ],
+    "entries": {
+      "openclaw-qqbot": {
+        "enabled": true
+      },
+      "memory-preload": {
+        "enabled": true
+      }
+    }
+  }
+}

@@ -1,0 +1,40 @@
+# Environment
+.env
+*.log
+
+# Data
+data/logs/
+data/*.db
+data/*.db-journal
+data/vector_store/*.sqlite3
+data/vector_store/*.sqlite3-*
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyc
+.pytest_cache/
+*.egg-info/
+.eggs/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+.docker/
+
+# PID files
+*.pid
+*.lock
+
+# Generated data
+vectors.db
+vectors.db.bak
+logs/

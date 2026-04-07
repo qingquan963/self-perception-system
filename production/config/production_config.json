@@ -1,0 +1,34 @@
+{
+  "version": "V1.8_optimized",
+  "deployment_time": "2026-03-23 20:28:00",
+  "backup_version": "V1.7_final_backup",
+  "performance_targets": {
+    "accuracy": 0.95,
+    "score_error": 10.0,
+    "communication_recognition": 0.90,
+    "response_time": 2.0
+  },
+  "rollback_conditions": {
+    "accuracy_below": 0.95,
+    "score_error_above": 10.0,
+    "communication_recognition_below": 0.90,
+    "system_error": true
+  },
+  "monitoring": {
+    "accuracy_monitoring_interval": 300,
+    "response_time_monitoring_interval": 60,
+    "error_rate_monitoring_interval": 300,
+    "alert_channels": ["log", "email"]
+  },
+  "data_storage": {
+    "chromadb_path": "[REDACTED]",
+    "memory_data_path": "[REDACTED]",
+    "backup_path": "[REDACTED]"
+  },
+  "logging": {
+    "log_level": "INFO",
+    "log_path": "[REDACTED]",
+    "max_log_size_mb": 100,
+    "log_retention_days": 30
+  }
+}

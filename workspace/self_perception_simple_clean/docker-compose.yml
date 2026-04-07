@@ -1,0 +1,50 @@
+# =============================================
+# 自我感知 + 做梦模式 整合系统
+# Docker Compose - 一键部署
+# =============================================
+# 使用: docker compose up
+# =============================================
+
+version: "3.9"
+
+services:
+  # ── 记忆系统（supervisor 托管 5 个子服务）────────────────────────
+  memory-system:
+    build: .
+    container_name: lobster-memory-system
+    restart: unless-stopped
+    ports:
+      - "8007:8007"   # 向量记忆服务
+      - "8011:8011"   # 自我感知 API
+      - "8014:8014"   # Compaction Writer
+      - "8001:8001"   # Dream Mode
+      - "8090:8090"   # 前端仪表板
+    environment:
+      # Supervisor 在容器内运行所有服务
+      PYTHONUNBUFFERED: "1"
+      # Compaction Writer 读取 session 摘要的目录（挂载宿主机的 sessions）
+      SESSION_JSONL_DIR: /sessions
+      # 向量库 HTTP API（供 dream_service 等内部调用）
+      VECTOR_API_URL: http://127.0.0.1:8007
+    volumes:
+      # 配置文件
+      - ./config:/app/config:ro
+      # 空数据目录（logs、state.db 等）
+      - memory_data:/app/data
+      # 向量库数据（持久化）
+      - memory_vectors:/app/data/vector_store
+      # Session 摘要目录（挂载宿主机的 OpenClaw sessions）
+      - ${HOME}/.openclaw/agents/main/sessions:/sessions:ro
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8011/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+
+# ── 数据卷 ────────────────────────────────────────────────────────
+volumes:
+  memory_data:
+    driver: local
+  memory_vectors:
+    driver: local

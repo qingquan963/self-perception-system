@@ -1,0 +1,42 @@
+{
+  "version": "1.0",
+  "created_at": "2026-03-23T20:50:20.859785",
+  "monitoring_enabled": true,
+  "monitoring_interval_minutes": 5,
+  "alert_channels": [
+    "log",
+    "file"
+  ],
+  "thresholds": {
+    "accuracy": {
+      "warning": 0.95,
+      "critical": 0.9,
+      "check_interval": 300
+    },
+    "score_error": {
+      "warning": 10.0,
+      "critical": 15.0,
+      "check_interval": 300
+    },
+    "communication_recognition": {
+      "warning": 0.9,
+      "critical": 0.85,
+      "check_interval": 300
+    },
+    "response_time": {
+      "warning": 2000,
+      "critical": 5000,
+      "check_interval": 60
+    },
+    "error_rate": {
+      "warning": 0.05,
+      "critical": 0.1,
+      "check_interval": 300
+    }
+  },
+  "log_settings": {
+    "log_level": "INFO",
+    "max_log_size_mb": 100,
+    "log_retention_days": 30
+  }
+}

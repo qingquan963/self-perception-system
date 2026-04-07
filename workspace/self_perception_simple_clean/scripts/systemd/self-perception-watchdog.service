@@ -1,0 +1,22 @@
+# self-perception-watchdog.service
+# systemd user service for watchdog
+# 安装位置: ~/.config/systemd/user/
+# 安装命令: systemctl --user enable self-perception-watchdog
+#          systemctl --user start self-perception-watchdog
+
+[Unit]
+Description=Self-Perception System Watchdog
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=%h/.openclaw/workspace/self_perception_simple_clean
+ExecStart=/usr/bin/python3 watchdog.py
+Restart=always
+RestartSec=5
+StandardOutput=append:%h/.openclaw/workspace/self_perception_simple_clean/data/logs/watchdog_stdout.log
+StandardError=append:%h/.openclaw/workspace/self_perception_simple_clean/data/logs/watchdog_stderr.log
+Environment="PYTHONUNBUFFERED=1"
+
+[Install]
+WantedBy=default.target

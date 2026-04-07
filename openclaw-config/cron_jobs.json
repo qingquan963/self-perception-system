@@ -1,0 +1,114 @@
+{
+  "version": 1,
+  "jobs": [
+    {
+      "id": "7345c700-92ce-4db7-8208-6df259884493",
+      "agentId": "main",
+      "sessionKey": "agent:main:main",
+      "name": "贴吧心跳",
+      "enabled": true,
+      "schedule": {
+        "kind": "every",
+        "everyMs": 7200000
+      },
+      "payload": {
+        "kind": "agentTurn",
+        "message": "执行贴吧心跳任务：阅读SKILL.md了解接口用法，用TB_TOKEN连接tieba.baidu.com，检查未读消息并回复，获取帖子列表点击访问，评论有意思的帖子。任务消息内容已省略。"
+      },
+      "delivery": {
+        "mode": "announce"
+      },
+      "note": "TB_TOKEN已脱敏"
+    },
+    {
+      "id": "f8a8a39f-743a-470f-ab40-4a7f0e55fef3",
+      "agentId": "main",
+      "sessionKey": "agent:main:main",
+      "name": "服务健康检查",
+      "enabled": true,
+      "schedule": {
+        "kind": "every",
+        "everyMs": 1800000
+      },
+      "payload": {
+        "kind": "agentTurn",
+        "message": "执行5大服务健康检查。检查端口：8007(向量记忆)、8011(API网关)、8090(前端)、8002(做梦服务)、8014(压缩写入)。"
+      },
+      "delivery": {
+        "mode": "announce"
+      }
+    },
+    {
+      "id": "fabe6ef2-d049-4d41-b88e-d4fc3c32962a",
+      "name": "做梦模式-空闲触发",
+      "enabled": true,
+      "schedule": {
+        "kind": "cron",
+        "expr": "30 13 * * *",
+        "tz": "Asia/Shanghai"
+      },
+      "payload": {
+        "kind": "agentTurn",
+        "message": "执行做梦模式关联记忆任务。运行关联分析脚本。"
+      },
+      "delivery": {
+        "mode": "announce",
+        "channel": "last"
+      }
+    },
+    {
+      "id": "b5e98edb-cb60-40ab-a1dc-37c607c923d6",
+      "name": "运维巡检-早间检查",
+      "enabled": true,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 8 * * *",
+        "tz": "Asia/Shanghai"
+      },
+      "payload": {
+        "kind": "agentTurn",
+        "message": "执行早间系统健康检查：端口存活、向量库数量、cron任务状态、日志错误检查。"
+      },
+      "delivery": {
+        "mode": "announce",
+        "channel": "last"
+      }
+    },
+    {
+      "id": "b550c32b-3d1f-4f2a-9c8e-b2d4a1c3e567",
+      "agentId": "main",
+      "name": "币安数据采集",
+      "enabled": false,
+      "schedule": {
+        "kind": "every",
+        "everyMs": 300000
+      },
+      "payload": {
+        "kind": "agentTurn",
+        "message": "执行币安历史K线数据采集。"
+      },
+      "delivery": {
+        "mode": "announce",
+        "channel": "last"
+      }
+    },
+    {
+      "id": "9df0f03b-545a-4e34-8b23-9584e697d8e6",
+      "name": "运维巡检-晚间检查",
+      "enabled": true,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 21 * * *",
+        "tz": "Asia/Shanghai"
+      },
+      "payload": {
+        "kind": "agentTurn",
+        "message": "执行晚间系统健康检查：端口存活、向量库数量、cron任务状态、日志错误检查。"
+      },
+      "delivery": {
+        "mode": "announce",
+        "channel": "last"
+      }
+    }
+  ]
+}

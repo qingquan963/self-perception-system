@@ -1,0 +1,22 @@
+# self-perception-supervisor.service
+# systemd user service for self-perception system
+# 安装位置: ~/.config/systemd/user/
+# 安装命令: systemctl --user enable self-perception-supervisor
+#          systemctl --user start self-perception-supervisor
+
+[Unit]
+Description=Self-Perception System Supervisor
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=%h/.openclaw/workspace/self_perception_simple_clean
+ExecStart=/usr/bin/python3 supervisor.py
+Restart=always
+RestartSec=5
+StandardOutput=append:%h/.openclaw/workspace/self_perception_simple_clean/data/logs/supervisor_stdout.log
+StandardError=append:%h/.openclaw/workspace/self_perception_simple_clean/data/logs/supervisor_stderr.log
+Environment="PYTHONUNBUFFERED=1"
+
+[Install]
+WantedBy=default.target
