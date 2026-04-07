@@ -2,10 +2,10 @@
   "version": "1.0",
   "created_at": "2026-03-23T20:43:36.907021",
   "storage": {
-    "chromadb_path": "C:\\Users\\Administrator\\.openclaw\\production\\data\\chroma",
-    "memory_data_path": "C:\\Users\\Administrator\\.openclaw\\production\\data\\memory",
-    "backup_path": "C:\\Users\\Administrator\\.openclaw\\production\\data\\backup",
-    "temp_path": "C:\\Users\\Administrator\\.openclaw\\production\\data\\temp"
+    "chromadb_path": "[REDACTED]",
+    "memory_data_path": "[REDACTED]",
+    "backup_path": "[REDACTED]",
+    "temp_path": "[REDACTED]"
   },
   "collections": {
     "memory_vectors": "记忆向量存储",
